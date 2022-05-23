@@ -29,28 +29,28 @@ END;
 -- METHOD 2 : Using Exceptions: just run the DROP TABLE Statement and suppress the errors
 -- This approach works faster and requires less resources
 BEGIN
-    EXECUTE IMMEDIATE 'DROP TABLE Results';
-EXCEPTION
-    WHEN OTHERS THEN NULL;
+	EXECUTE IMMEDIATE 'DROP TABLE Results';
+	EXCEPTION
+		WHEN OTHERS THEN NULL;
 END;
 /
 
 CREATE TABLE Student(
-    RegNo NUMBER(10) NOT NULL,
-    Stud_Name VARCHAR2(20) NOT NULL unique,
+   	RegNo NUMBER(10) NOT NULL,
+    	Stud_Name VARCHAR2(20) NOT NULL unique,
 	DateOfBirth DATE, 
 	Residence CHAR(15) DEFAULT 'NAIROBI',
-    CONSTRAINT check_date CHECK (DateOfBirth <= '01-JAN-2000'),/* Date format is diff in t-sql and pl/sql. In T-SQL we can use /, JAN, etc */
+    	CONSTRAINT check_date CHECK (DateOfBirth <= '01-JAN-2000'),/* Date format is diff in t-sql and pl/sql. In T-SQL we can use /, JAN, etc */
 	CONSTRAINT PRI_KEY PRIMARY KEY (RegNo)
-    );
+   	);
     
 CREATE TABLE Results (
-    STUD_ID NUMBER(10) NOT NULL,
+    	STUD_ID NUMBER(10) NOT NULL,
 	MATHS NUMBER(2) CHECK (MATHS<=99 AND MATHS>0),
-    LANGUAGES NUMBER(2) CHECK (LANGUAGES<=99 AND LANGUAGES>0),
-    SCIENCE NUMBER(2) CHECK (SCIENCE<=99 AND SCIENCE>0),
-    SOCIALST_RE NUMBER(2) CHECK (SOCIALST_RE<=99 AND SOCIALST_RE>0)
-    );
+    	LANGUAGES NUMBER(2) CHECK (LANGUAGES<=99 AND LANGUAGES>0),
+    	SCIENCE NUMBER(2) CHECK (SCIENCE<=99 AND SCIENCE>0),
+    	SOCIALST_RE NUMBER(2) CHECK (SOCIALST_RE<=99 AND SOCIALST_RE>0)
+    	);
     
 ALTER TABLE Results ADD CONSTRAINT FKID FOREIGN KEY(STUD_ID) REFERENCES Student(RegNo);
 
@@ -84,10 +84,10 @@ ALTER TABLE Student
     
 -- Renaming columns
 ALTER TABLE Student
-    RENAME COLUMN Home_Addr TO Permanent_Address;
+    	RENAME COLUMN Home_Addr TO Permanent_Address;
     
 ALTER TABLE Student    
-    RENAME COLUMN Email TO Student_Email;
+    	RENAME COLUMN Email TO Student_Email;
     
 -- Renaming a table
 -- ALTER TABLE Student RENAME TO Students;
@@ -101,7 +101,7 @@ ALTER TABLE Student
 	DROP COLUMN Permanent_Address;
     
 ALTER TABLE Student    
-    DROP COLUMN Student_Email;
+    	DROP COLUMN Student_Email;
     
 -- We can now drop column from table since it is owned by mulongoCheloti and NOT SYS
 
@@ -110,17 +110,11 @@ SELECT * FROM USER_USERS;
 -- Describes the current user:
 
 INSERT INTO Student (RegNo, Stud_Name, DateOfBirth, Residence) VALUES (811, 'PAUL MULONGO', 'JUN-21-1999', 'BUNGOMA');
-
 INSERT INTO Student (RegNo, Stud_Name, DateOfBirth, Residence) VALUES (819, 'LAURA MUTHEU','09-19/1999','KITUI');
-
 INSERT INTO Student (RegNo, Stud_Name, DateOfBirth, Residence) VALUES (812, 'RANDOLPH KITILA', 'APR-20-1998','NAIROBI');
-		
 INSERT INTO Student (RegNo, Stud_Name, DateOfBirth, Residence) VALUES (814, 'MARY WANJIKU', 'MAR-24-1997', 'THIKA');
-		
 INSERT INTO Student (RegNo, Stud_Name, DateOfBirth, Residence) VALUES (816, 'RONY WAIREGA', 'AUG/20/1998', 'LIMURU');
-		
-INSERT INTO Student (RegNo, Stud_Name, DateOfBirth, Residence) VALUES (817, 'ELVIS ODUOR','09-13-1997','KISUMU');
-		
+INSERT INTO Student (RegNo, Stud_Name, DateOfBirth, Residence) VALUES (817, 'ELVIS ODUOR','09-13-1997','KISUMU');	
 INSERT INTO Student (RegNo, Stud_Name, DateOfBirth, Residence) VALUES (818, 'ALLAN PETER','FEB-14-1998','LIMURU');
             
 INSERT INTO Student (RegNo, DateOfBirth, Stud_Name, Residence) VALUES (813, 'FEB-01-2000', 'BRIAN WAEMA', 'MAKINDU');
@@ -130,7 +124,6 @@ INSERT INTO Student (RegNo, DateOfBirth, Stud_Name, Residence) VALUES (820, 'AUG
 -- Error report -ORA-02290: check constraint (MULONGOCHELOTI.CHECK_DATE) violated
 
 ALTER TABLE Student DROP CONSTRAINT CHECK_DATE;
-
 
 SELECT * FROM Student;
 
@@ -257,9 +250,9 @@ INSERT ALL
     INTO Student (RegNo, Stud_Name, DateOfBirth, Town) VALUES (819, 'LAURA MUTHEU','09-19/1999','KITUI')
     INTO Student (RegNo, Stud_Name, DateOfBirth, Town) VALUES (812, 'RANDOLPH KITILA', 'APR-20-1998','NAIROBI')
     INTO Student (RegNo, Stud_Name, DateOfBirth, Town) VALUES (814, 'MARY WANJIKU', 'MAR-24-1997', 'THIKA')
-	INTO Student (RegNo, Stud_Name, DateOfBirth, Town) VALUES (816, 'RONY WAIREGA', 'AUG/20/1998', 'LIMURU')
-	INTO Student (RegNo, Stud_Name, DateOfBirth, Town) VALUES (817, 'ELVIS ODUOR','09-13-1997','KISUMU')
-	INTO Student (RegNo, Stud_Name, DateOfBirth, Town) VALUES (818, 'ALLAN PETER','FEB-14-1998','LIMURU')
+    INTO Student (RegNo, Stud_Name, DateOfBirth, Town) VALUES (816, 'RONY WAIREGA', 'AUG/20/1998', 'LIMURU')
+    INTO Student (RegNo, Stud_Name, DateOfBirth, Town) VALUES (817, 'ELVIS ODUOR','09-13-1997','KISUMU')
+    INTO Student (RegNo, Stud_Name, DateOfBirth, Town) VALUES (818, 'ALLAN PETER','FEB-14-1998','LIMURU')
     INTO Student (RegNo, DateOfBirth, Stud_Name, Town) VALUES (813, 'FEB-01-2000', 'BRIAN WAEMA', 'MAKINDU')
     INTO Student (RegNo, DateOfBirth, Stud_Name, Town) VALUES (815, 'MAY-01-2001', 'BRIDGET MWENGA', 'MACHAKOS')
     INTO Student (RegNo, DateOfBirth, Stud_Name, Town) VALUES (820, 'AUG-08-2000', 'SHARON GITOGO','THIKA')
@@ -316,9 +309,9 @@ INSERT ALL
     INTO Student (RegNo, Stud_Name, DateOfBirth, Town, Position, Prize) VALUES (819, 'LAURA MUTHEU','09-19/1999','KITUI',10,200)
     INTO Student (RegNo, Stud_Name, DateOfBirth, Town, Position, Prize) VALUES (812, 'RANDOLPH KITILA', 'APR-20-1998','NAIROBI',5,1500)
     INTO Student (RegNo, Stud_Name, DateOfBirth, Town, Position, Prize) VALUES (814, 'MARY WANJIKU', 'MAR-24-1997', 'THIKA',7,800)
-	INTO Student (RegNo, Stud_Name, DateOfBirth, Town, Position, Prize) VALUES (816, 'RONY WAIREGA', 'AUG/20/1998', 'LIMURU',2,4000)
-	INTO Student (RegNo, Stud_Name, DateOfBirth, Town, Position, Prize) VALUES (817, 'ELVIS ODUOR','09-13-1997','KISUMU',4,2000)
-	INTO Student (RegNo, Stud_Name, DateOfBirth, Town, Position, Prize) VALUES (818, 'ALLAN PETER','FEB-14-1998','LIMURU',6,1000)
+    INTO Student (RegNo, Stud_Name, DateOfBirth, Town, Position, Prize) VALUES (816, 'RONY WAIREGA', 'AUG/20/1998', 'LIMURU',2,4000)
+    INTO Student (RegNo, Stud_Name, DateOfBirth, Town, Position, Prize) VALUES (817, 'ELVIS ODUOR','09-13-1997','KISUMU',4,2000)
+    INTO Student (RegNo, Stud_Name, DateOfBirth, Town, Position, Prize) VALUES (818, 'ALLAN PETER','FEB-14-1998','LIMURU',6,1000)
     INTO Student (RegNo, DateOfBirth, Stud_Name, Town, Position, Prize) VALUES (813, 'FEB-01-2000', 'BRIAN WAEMA', 'MAKINDU',3,3000)
     INTO Student (RegNo, DateOfBirth, Stud_Name, Town, Position, Prize) VALUES (815, 'MAY-01-2001', 'BRIDGET MWENGA', 'MACHAKOS',9,450)
     INTO Student (RegNo, DateOfBirth, Stud_Name, Town, Position, Prize) VALUES (820, 'AUG-08-2000', 'SHARON GITOGO','THIKA',8,650)
@@ -360,9 +353,9 @@ INSERT ALL
     INTO Student (RegNo, Stud_Name, DateOfBirth, Town, Position, Prize) VALUES (819, 'LAURA MUTHEU','09-19/1999','KITUI',10,200)
     INTO Student (RegNo, Stud_Name, DateOfBirth, Town, Position, Prize) VALUES (812, 'RANDOLPH KITILA', 'APR-20-1998','NAIROBI',5,1500)
     INTO Student (RegNo, Stud_Name, DateOfBirth, Town, Position, Prize) VALUES (814, 'MARY WANJIKU', 'MAR-24-1997', 'THIKA',7,800)
-	INTO Student (RegNo, Stud_Name, DateOfBirth, Town, Position, Prize) VALUES (816, 'RONY WAIREGA', 'AUG/20/1998', 'LIMURU',2,4000)
-	INTO Student (RegNo, Stud_Name, DateOfBirth, Town, Position, Prize) VALUES (817, 'ELVIS ODUOR','09-13-1997','KISUMU',4,2000)
-	INTO Student (RegNo, Stud_Name, DateOfBirth, Town, Position, Prize) VALUES (818, 'ALLAN PETER','FEB-14-1998','LIMURU',6,1000)
+    INTO Student (RegNo, Stud_Name, DateOfBirth, Town, Position, Prize) VALUES (816, 'RONY WAIREGA', 'AUG/20/1998', 'LIMURU',2,4000)
+    INTO Student (RegNo, Stud_Name, DateOfBirth, Town, Position, Prize) VALUES (817, 'ELVIS ODUOR','09-13-1997','KISUMU',4,2000)
+    INTO Student (RegNo, Stud_Name, DateOfBirth, Town, Position, Prize) VALUES (818, 'ALLAN PETER','FEB-14-1998','LIMURU',6,1000)
     INTO Student (RegNo, DateOfBirth, Stud_Name, Town, Position, Prize) VALUES (813, 'FEB-01-2000', 'BRIAN WAEMA', 'MAKINDU',3,3000)
     INTO Student (RegNo, DateOfBirth, Stud_Name, Town, Position, Prize) VALUES (815, 'MAY-01-2001', 'BRIDGET MWENGA', 'MACHAKOS',9,450)
     INTO Student (RegNo, DateOfBirth, Stud_Name, Town, Position, Prize) VALUES (820, 'AUG-08-2000', 'SHARON GITOGO','THIKA',8,650)
@@ -383,9 +376,6 @@ SELECT * FROM Student;
 ALTER TABLE Student DROP CONSTRAINT Prize_limit;
 
 -- Understanding DATE_FORMAT()
-SELECT DateOfBirth, TO_DATE(DateOfBirth, '%MMDDYY') AS modifiedDate FROM student;
-SELECT DateOfBirth, DATE_FORMAT(DateOfBirth, '%M-%y-%d') AS modifiedDate FROM student;
-SELECT DateOfBirth, DATE_FORMAT(DateOfBirth, '%D %M, %Y') AS modifiedDate FROM student;
 
 SELECT TO_DATE('070198', 'MMDDYY') FROM DUAL;
 SELECT  EXTRACT( HOUR FROM TO_TIMESTAMP('2001/05/23 08:30:25', 'YYYY/MM/DD HH:MI:SS')) FROM DUAL;
@@ -421,4 +411,3 @@ CREATE TABLE testTable1 (ID Number GENERATED BY DEFAULT ON NULL AS IDENTITY CACH
                          
 -- When you create an identity column, Oracle generate 20 auto increment values before hand for performance reasons
 -- and ORACLE recommends to include CACHE Clause greater than the default of 20 to improve performance
-
