@@ -22,3 +22,4 @@ Database schema dump file: <a href="https://github.com/mulongocheloti/Oracle-SQL
 The clip session below shows the code running in Oracle SQL Developer;<br>
 
 https://user-images.githubusercontent.com/68067031/175329138-29e8bc59-ead9-44d9-8f2f-6212da002914.mp4
+https://github.com/mulongocheloti/COVID-19-PREDICTOR/blob/main/local-deploymemt-using-streamlit.mp4
